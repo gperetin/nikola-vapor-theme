@@ -4,6 +4,7 @@
 {% macro html_header() %}
     <header id="site-head">
         {{ html_site_title() }}
+        {{ html_social_buttons() }}
         {{ html_translation_header() }}
         {{ html_navigation_links() }}
         {% if search_form %}
@@ -26,6 +27,10 @@
         <h1 class="blog-title">{{ blog_title }}</h1>
     {% endif %}
     </a></h1>
+{% endmacro %}
+
+{% macro html_social_buttons() %}
+    {{ social_buttons_code }}
 {% endmacro %}
 
 {% macro html_navigation_links() %}

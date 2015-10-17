@@ -29,7 +29,7 @@
 {% endmacro %}
 
 {% macro html_navigation_links() %}
-    <nav id="menu">
+    <nav class="menu" role="nav">
     <ul>
     {% for url, text in navigation_links[lang] %}
         {% if isinstance(url, tuple) %}

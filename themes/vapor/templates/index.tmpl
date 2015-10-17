@@ -1,0 +1,38 @@
+{#  -*- coding: utf-8 -*- #}
+{% import 'index_helper.tmpl' as helper with context %}
+{% import 'comments_helper.tmpl' as comments with context %}
+{% extends 'base.tmpl' %}
+
+{% block extra_head %}
+    {{ super() }}
+    {% if posts and (permalink == '/' or permalink == '/' + index_file) %}
+        <link rel="prefetch" href="{{ posts[0].permalink() }}" type="text/html">
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% block content_header %}{% endblock %}
+{% for post in posts %}
+    <article class="preview">
+    <header>
+        <h1 class="post-title"><a href="{{ post.permalink() }}">{{ post.title()|e }}</a></h1>
+        <div class="post-meta">
+            <time datetime="{{ post.formatted_date('webiso') }}">{{ post.formatted_date(date_format)|e }}</time></div>
+
+            {% if not post.meta('nocomments') and site_has_comments %}
+                <p class="commentline">{{ comments.comment_link(post.permalink(), post._base_path) }}
+            {% endif %}
+        </div>
+    </header>
+
+    <section class="post-excerpt">
+        <p>{{ post.text(teaser_only=True) }}&hellip;</p>
+        <p class="readmore"><a href="{{ post.permalink() }}">Read this article <i class="fa fa-chevron-circle-right"></i></a></p>
+    </section>
+
+    </article>
+{% endfor %}
+{{ helper.html_pager() }}
+{{ comments.comment_link_script() }}
+{{ helper.mathjax_script(posts) }}
+{% endblock %}

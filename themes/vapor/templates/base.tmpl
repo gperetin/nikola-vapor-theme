@@ -13,13 +13,11 @@
 <body>
 <a href="#content" class="sr-only sr-only-focusable">{{ messages("Skip to main content") }}</a>
 
-     {{ header.html_header() }}
-    <div id="container">
-         <main id="content">
-            {% block content %}{% endblock %}
-         </main>
-         {{ footer.html_footer() }}
-    </div>
+    {{ header.html_header() }}
+     <main class="content" role="main">
+        {% block content %}{% endblock %}
+     </main>
+    {{ footer.html_footer() }}
     {{ base.late_load_js() }}
     {% block extra_js %}{% endblock %}
     {{ body_end }}
